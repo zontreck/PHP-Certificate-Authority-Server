@@ -41,7 +41,7 @@ function setup_certstore($my_certstore_path)
     exit();
   }
   if ($is_writable) {
-    $my_settings = file_get_contents('./settings.php') or die('Fatal: Unable to open ./settings.php');
+    $my_settings = file_get_contents('./include/settings.php') or die('Fatal: Unable to open ./include/settings.php');
     if (substr($my_certstore_path, -1) != '/')
       $my_certstore_path = $my_certstore_path . '/';
     $my_settings = str_replace('NOT_DEFINED', $my_certstore_path, $my_settings) or die('Unable to update variable holding settings string');
