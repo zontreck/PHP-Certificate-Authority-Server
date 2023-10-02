@@ -68,11 +68,16 @@ function createCSR_form()
       </tr>
       <tr>
         <th>Device Type</th>
-        <td><input type="radio" name="device_type" value="client_cert" /> Client <input type="radio" name="device_type"
-            value="server_cert" checked /> Server<input type="radio" name="device_type" value="msdc_cert" /> Microsoft
-          Domain Controller<input type="radio" name="device_type" value="subca_cert" /> Sub_CA <input type="radio"
-            name="device_type" value="8021x_client_cert" /> 802.1x Client<input type="radio" name="device_type"
-            value="8021x_server_cert" /> 802.1x Server</td>
+        <td>
+          <input type="radio" name="device_type" value="client_cert" /> Client 
+          <input type="radio" name="device_type" value="server_cert" checked /> Server
+          <input type="radio" name="device_type" value="msdc_cert" /> Microsoft Domain Controller
+          <input type="radio" name="device_type" value="subca_cert" /> Sub_CA 
+          <input type="radio" name="device_type" value="8021x_client_cert" /> 802.1x Client
+          <input type="radio" name="device_type" value="8021x_server_cert" /> 802.1x Server
+          <Input type="radio" name="device_type" value="codesigning_cert" /> Code Signing
+          <input type="radio" name="device_type" value="ev_codesigning_cert" /> EV Code Signing
+        </td>
       </tr>
       <tr>
         <th>Certificate Passphrase</th>

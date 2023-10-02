@@ -94,6 +94,16 @@ function create_cert_store($my_certstore_path, $my_common_name)
   fclose($fp) or die('Unable to close write Index file ' . $config['index']);
   print "Done.\n<br><br>";
 
+  update_ca_openssl_config();
+
+  print "Done\n<br><br>";
+  print "Certstore files and folders created successfully.<br><br>\n";
+}
+
+function update_ca_openssl_config()
+{
+  $config = update_config();
+  
   print "Creating openssl.conf file for this CA\n<br>";
   $orig_fp = fopen('./include/openssl.conf', "r") or die('Unable to open OPENSSL.CONF template');
   $new_fp = fopen($config['config'], "w") or die('Unable to open OPENSSL.CONF new file');
@@ -106,10 +116,7 @@ function create_cert_store($my_certstore_path, $my_common_name)
   }
   fclose($orig_fp);
   fclose($new_fp);
-  print "Done\n<br><br>";
-  print "Certstore files and folders created successfully.<br><br>\n";
 }
-
 /*
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
 {

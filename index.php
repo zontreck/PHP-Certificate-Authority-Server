@@ -340,7 +340,15 @@ switch ($menuoption) {
         show_summary();
         printFooter();
         break;
-
+    case "update_ca_osslconf":
+        printHeader("Update OpenSSL CA Config");
+        if(isset($_SESSION['my_ca']))
+            update_ca_openssl_config();
+        else{
+            switch_ca_form();
+            die("You must select a CA first");
+        }
+        break;
     default:
         printHeader("Unknown area");
         print "Unknown menuoption.";
