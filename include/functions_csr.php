@@ -22,47 +22,43 @@ function createCSR_form()
         <td><input type="text" name="cert_dn[emailAddress]" value=<?PHP if (array_key_exists('emailAddress', $my_x509_parse['subject']))
           print $my_x509_parse['subject']['emailAddress'];
         else
-          print '""'; ?> size="30"></td>
+          print '""'; ?> size="30">
+        </td>
       </tr>
       <tr>
         <th>Organizational Unit Name</th>
         <td><input type="text" name="cert_dn[organizationalUnitName]" value=<?PHP if (array_key_exists('OU', $my_x509_parse['subject']))
           print $my_x509_parse['subject']['OU'];
         else
-          print '""'; ?>
-            size="30"></td>
+          print '""'; ?> size="30"></td>
       </tr>
       <tr>
         <th>Organization Name</th>
         <td><input type="text" name="cert_dn[organizationName]" value=<?PHP if (array_key_exists('O', $my_x509_parse['subject']))
           print $my_x509_parse['subject']['O'];
         else
-          print '""'; ?>
-            size="25"></td>
+          print '""'; ?> size="25"></td>
       </tr>
       <tr>
         <th>City</th>
         <td><input type="text" name="cert_dn[localityName]" value=<?PHP if (array_key_exists('L', $my_x509_parse['subject']))
           print $my_x509_parse['subject']['L'];
         else
-          print '""'; ?>
-            size="25"></td>
+          print '""'; ?> size="25"></td>
       </tr>
       <tr>
         <th>State</th>
         <td><input type="text" name="cert_dn[stateOrProvinceName]" value=<?PHP if (array_key_exists('ST', $my_x509_parse['subject']))
           print $my_x509_parse['subject']['ST'];
         else
-          print '""'; ?>
-            size="25"></td>
+          print '""'; ?> size="25"></td>
       </tr>
       <tr>
         <th>Country</th>
         <td><input type="text" name="cert_dn[countryName]" value=<?PHP if (array_key_exists('C', $my_x509_parse['subject']))
           print $my_x509_parse['subject']['C'];
         else
-          print '""'; ?>
-            size="2"></td>
+          print '""'; ?> size="2"></td>
       </tr>
       <tr>
         <th>Key Size</th>
@@ -98,11 +94,7 @@ function create_csr($my_cert_dn, $my_keysize, $my_passphrase, $my_device_type)
 
   print "<h1>Creating Certificate Key</h1>";
   print "PASSWORD:" . $my_passphrase . "<BR>";
-  if (get_magic_quotes_gpc()) {
-    while (list($key, $val) = each($cert_dn)) {
-      $cert_dn[$key] = stripslashes($val);
-    }
-  }
+
   while (list($key, $val) = each($my_cert_dn)) {
     if (array_key_exists($key, $my_cert_dn))
       if (strlen($my_cert_dn[$key]) > 0) {
@@ -110,12 +102,13 @@ function create_csr($my_cert_dn, $my_keysize, $my_passphrase, $my_device_type)
       }
   }
   $my_csrfile = "";
-  while (list($key, $val) = each($config['blank_dn'])) {
+  foreach ($config['blank_dn'] as $key => $value) {
     if (isset($cert_dn[$config['convert_dn'][$key]]))
       $my_csrfile = $my_csrfile . $cert_dn[$config['convert_dn'][$key]] . ":";
     else
       $my_csrfile = $my_csrfile . ":";
   }
+
   $my_csrfile = substr($my_csrfile, 0, strrpos($my_csrfile, ':'));
   $filename = base64_encode($my_csrfile);
   print "CSR Filename : " . $my_csrfile . "<BR>";
@@ -759,11 +752,10 @@ function sign_csr($passPhrase, $my_csrfile, $my_days, $my_device_type)
     ?>
     <form action="index.php" method="post">
       <input type="hidden" name="menuoption" value="download_cert">
-      <input type="hidden" name="cert_name"
-        value="<?PHP if ($my_device_type == 'ca_cert')
-          print 'zzTHISzzCAzz';
-        else
-          print $my_csrfile; ?>">
+      <input type="hidden" name="cert_name" value="<?PHP if ($my_device_type == 'ca_cert')
+        print 'zzTHISzzCAzz';
+      else
+        print $my_csrfile; ?>">
       <input type="submit" value="Download Signed Certificate">
     </form>
     <BR>
