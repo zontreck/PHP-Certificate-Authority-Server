@@ -55,7 +55,7 @@ function printFooter($SHOW_CA_NAME = TRUE)
 function display_menu()
 {
   ?>
-  <script type='text/javascript'>\n
+  <script type='text/javascript'>
     $(function () {
       $('tr.all_menu_class').contextMenu('all_menu', {
         menuStyle: {
