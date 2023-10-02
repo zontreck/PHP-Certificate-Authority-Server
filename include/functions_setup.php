@@ -35,7 +35,7 @@ function setup_certstore($my_certstore_path)
     mkdir($my_certstore_path, 0700, true) or die('Fatal: Unable to create Certificate Store folder' . $my_certstore_path);
 
   $is_writable = TRUE;
-  if (!is_writable('./settings.php')) {
+  if (!is_writable('./settings.php') && exists("./settings.php")) {
     $is_writable = FALSE;
     print "You do not have write permissions to the file " . $_SESSION['cwd'] . "/settings.php<BR>\n<BR>\n";
     exit();
