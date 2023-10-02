@@ -95,14 +95,15 @@ function create_csr($my_cert_dn, $my_keysize, $my_passphrase, $my_device_type)
   print "<h1>Creating Certificate Key</h1>";
   print "PASSWORD:" . $my_passphrase . "<BR>";
 
-  while (list($key, $val) = each($my_cert_dn)) {
+  foreach ($my_cert_dn as $key => $val){
     if (array_key_exists($key, $my_cert_dn))
       if (strlen($my_cert_dn[$key]) > 0) {
         $cert_dn[$key] = $my_cert_dn[$key];
       }
   }
+  
   $my_csrfile = "";
-  foreach ($config['blank_dn'] as $key => $value) {
+  foreach ($config['blank_dn'] as $key => $val) {
     if (isset($cert_dn[$config['convert_dn'][$key]]))
       $my_csrfile = $my_csrfile . $cert_dn[$config['convert_dn'][$key]] . ":";
     else
