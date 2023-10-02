@@ -93,11 +93,11 @@ function display_menu()
             $.post('index.php', { menuoption: 'sign_csr_form', csr_name: t.id + '.pem', print_content_only: 'TRUE' }, function (data) { var win = window.open('', 'Sign CSR', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=50,left=50,width=800,height=600'); win.document.write(data); });
           },
           'download_csr': function (t) {
-            var url = '/phpca/index.php?menuoption=download_csr&csr_name=' + t.id + '.pem&rename_ext=csr';
+            var url = 'index.php?menuoption=download_csr&csr_name=' + t.id + '.pem&rename_ext=csr';
             window.location = url;
           },
           'download_pkcs12': function (t) {
-            var url = '/phpca/index.php?menuoption=download_cert&cert_name=' + t.id + '.p12&rename_ext=pfx';
+            var url = 'index.php?menuoption=download_cert&cert_name=' + t.id + '.p12&rename_ext=pfx';
             window.location = url;
           },
           'view_cert': function (t) {
@@ -132,7 +132,7 @@ function display_menu()
           <li><a href="index.php?menuoption=download_csr_form">Download a CSR</a></li>
           <li><a href="index.php?menuoption=view_csr_details_form">View a CSR's Details</a></li>
           <li><a href="index.php?menuoption=sign_csr_form">Sign a CSR</a></li>
-        </ul>\n
+        </ul>
       </li>
       <li><a href="#">Certificate Functions</a>
         <ul>
@@ -140,14 +140,14 @@ function display_menu()
           <li><a href="index.php?menuoption=revoke_cert_form">Revoke a Certificate</a></li>
           <li><a href="index.php?menuoption=convert_cert_pkcs12_form">Convert a Certificate to PKCS#12</a></li>
           <li><a href="index.php?menuoption=view_cert_details_form">View a Certificate's Details</a></li>
-        </ul>\n
+        </ul>
       </li>
       <li><a href="#">Key Functions</a>
         <ul>
           <li><a href="index.php?menuoption=get_public_ssh_key_form">Get Public SSH Key</a></li>
           <li><a href="index.php?menuoption=get_mod_private_form">Get Private Key</a></li>
           <li><a href="index.php?menuoption=check_key_passphrase_form">Check a private key's passphrase</a></li>
-        </ul>\n
+        </ul>
       </li>
       <li><a href="#">CA Functions</a>
         <ul>
@@ -155,7 +155,7 @@ function display_menu()
           <li><a href="index.php?menuoption=download_crl_form">Download CRL</a></li>
           <li><a href="index.php?menuoption=delete_ca_form">Delete CA</a></li>
           <li><a href="/?menuoption=update_ca_osslconf">Update OpenSSL Config</a></li>
-        </ul>\n
+        </ul>
       </li>
       <li><a href="index.php?menuoption=show_summary">Show Summary</a></li>
     </ul>
