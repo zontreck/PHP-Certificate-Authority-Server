@@ -2,7 +2,9 @@
 if (session_id() === '') {
     session_start();
 }
-include("./include/settings.php");
+if(file_exists("settings.php")) require("settings.php");
+else
+    include("./include/settings.php");
 include("./include/functions_setup.php");
 include("./include/functions_layout.php");
 include("./include/functions_csr.php");

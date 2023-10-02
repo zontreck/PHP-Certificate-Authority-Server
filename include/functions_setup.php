@@ -35,17 +35,17 @@ function setup_certstore($my_certstore_path)
     mkdir($my_certstore_path, 0700, true) or die('Fatal: Unable to create Certificate Store folder' . $my_certstore_path);
 
   $is_writable = TRUE;
-  if (!is_writable('./include/settings.php')) {
+  if (!is_writable('./settings.php')) {
     $is_writable = FALSE;
-    print "You do not have write permissions to the file " . $_SESSION['cwd'] . "/include/settings.php<BR>One way around this in Linux is to use<BR>chown -R www-data:www-data " . $_SESSION['cwd'] . "/include<BR>\n<BR>\n";
+    print "You do not have write permissions to the file " . $_SESSION['cwd'] . "/settings.php<BR>\n<BR>\n";
     exit();
   }
   if ($is_writable) {
-    $my_settings = file_get_contents('./include/settings.php') or die('Fatal: Unable to open ./include/settings.php');
+    $my_settings = file_get_contents('./settings.php') or die('Fatal: Unable to open ./settings.php');
     if (substr($my_certstore_path, -1) != '/')
       $my_certstore_path = $my_certstore_path . '/';
     $my_settings = str_replace('NOT_DEFINED', $my_certstore_path, $my_settings) or die('Unable to update variable holding settings string');
-    file_put_contents('./include/settings.php', $my_settings) or die('Fatal: Unable to write ./include/settings.php');
+    file_put_contents('./settings.php', $my_settings) or die('Fatal: Unable to write ./settings.php');
   }
   ?>
   <h1>Initial Setup Complete</h1>
